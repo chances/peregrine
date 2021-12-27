@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        ".envrc": "shellscript",
+        "*.Makefile": "makefile",
+        "wren.h": "c",
+        "wgpu.h": "c"
+    }
+}
