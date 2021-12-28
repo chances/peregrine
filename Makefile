@@ -7,7 +7,7 @@ ifndef CONFIG
 	CONFIG := debug
 endif
 ifeq ($(CONFIG),debug)
-	CFLAGS += -g
+	CFLAGS += -g -DDEBUG
 endif
 
 INCLUDE_DIRS := subprojects/glfw/include/GLFW subprojects/wgpu subprojects/wren/src/include

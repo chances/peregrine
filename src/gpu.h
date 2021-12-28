@@ -13,6 +13,9 @@ void peregrine_gpu_requestAdapterCallback(
   void* userdata
 ) {
   assert(status == WGPURequestAdapterStatus_Success);
+#ifdef DEBUG
+  if (message != NULL) printf("%s\n", message);
+#endif
   ((Runtime*)userdata)->adapter = received;
 }
 
@@ -22,6 +25,9 @@ void peregrine_gpu_requestDeviceCallback(
   void* userdata
 ) {
   assert(status == WGPURequestDeviceStatus_Success);
+#ifdef DEBUG
+  if (message != NULL) printf("%s\n", message);
+#endif
   ((Runtime*)userdata)->device = received;
 }
 
