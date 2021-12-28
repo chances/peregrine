@@ -7,6 +7,7 @@
 struct Runtime {
   WrenConfiguration config;
   WrenVM* vm;
+  char* error;
   WGPUAdapter adapter;
   WGPUDevice device;
 };

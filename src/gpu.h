@@ -7,6 +7,7 @@
 #include "runtime.h"
 #include "platform.h"
 
+#pragma region Initialization
 void peregrine_gpu_requestAdapterCallback(
   WGPURequestAdapterStatus status,
   WGPUAdapter received, const char* message,
@@ -77,5 +78,6 @@ void gpuInit(Runtime* runtime, WGPUSurface surface) {
     },
   }, &peregrine_gpu_requestDeviceCallback, (void*) runtime);
 }
+#pragma endregion
 
 #endif // PEREGRINE_GPU_H

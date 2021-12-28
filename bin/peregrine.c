@@ -1,6 +1,7 @@
 #define GLFW_EXPOSE_NATIVE_COCOA
 
 #include <glfw3.h>
+#include <time.h>
 #include <wgpu.h>
 #include <wren.h>
 
@@ -9,7 +10,11 @@
 #include "../src/gpu.h"
 
 int main(int argc, char const *argv[]) {
-  Runtime runtime = runtimeInit();
+  if (argc < 2) {
+    return 1;
+  }
+
+  Runtime* runtime = runtimeInit();
 
   glfwInit();
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -30,26 +35,44 @@ int main(int argc, char const *argv[]) {
     .label = NULL,
     .nextInChain = (const WGPUChainedStruct*) surfaceDescriptor,
   });
-  gpuInit(&runtime, surface);
+  gpuInit(runtime, surface);
 
-  const char* module = "main";
-  const char* script = "System.print(\"I am running in a VM!\")";
-
-  if (wrenInterpret(runtime.vm, module, script) != WREN_RESULT_SUCCESS) {
-    // TODO: case WREN_RESULT_COMPILE_ERROR: { printf("Compile Error!\n"); } break;
-    // TODO: case WREN_RESULT_RUNTIME_ERROR: { printf("Runtime Error!\n"); } break;
-    return 1;
-  }
+  scriptLoad(runtime, argv[1], "main");
+  WrenHandle* app = wrenGetClass(runtime->vm, "main", "App");
+  WrenHandle* app_tick = wrenMakeCallHandle(runtime->vm, "tick(_)");
 
   #pragma region Main Loop
+  struct timespec clock;
+  assert(clock_gettime(CLOCK_MONOTONIC, &clock) == 0);
+  long start = clock.tv_nsec;
+
   glfwShowWindow(window);
   while(!glfwWindowShouldClose(window)) {
     glfwPollEvents();
+
+    assert(clock_gettime(CLOCK_MONOTONIC, &clock) == 0);
+    long elapsed = clock.tv_nsec - start;
+    wrenEnsureSlots(runtime->vm, 2);
+    wrenSetSlotHandle(runtime->vm, 0, app);
+    wrenSetSlotDouble(runtime->vm, 1, elapsed / 1000000.0f);
+    if (wrenCall(runtime->vm, app_tick) != WREN_RESULT_SUCCESS) {
+      scriptError(runtime);
+    }
+
+    start = clock.tv_nsec;
   }
   #pragma endregion
 
   glfwTerminate();
-  wrenFreeVM(runtime.vm);
+  wrenFreeVM(runtime->vm);
+  free(runtime);
 
   return 0;
 }
+
+const char* test = "class App {\
+    static tick(dt) {\
+        System.print(dt)\
+    }\
+    static render() {}\
+}";
