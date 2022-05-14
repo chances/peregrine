@@ -3,14 +3,15 @@
         {
             "name": "Mac",
             "includePath": [
-              "${workspaceFolder}/**",
-              "${workspaceFolder}/subprojects/glfw/include/GLFW"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/subprojects/glfw/include/GLFW",
+                "${workspaceFolder}/subprojects/wren/src/include"
             ],
             "defines": [
-              "GLFW_EXPOSE_NATIVE_COCOA"
+                "GLFW_EXPOSE_NATIVE_COCOA"
             ],
             "macFrameworkPath": [
-              "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",

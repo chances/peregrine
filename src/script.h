@@ -1,5 +1,6 @@
 #pragma once
 
+#include <assert.h>
 #include <stdio.h>
 #include <wren.h>
 
@@ -70,7 +71,7 @@ bool scriptLoad(Runtime* runtime, const char* file, const char* module) {
   fseek(f, 0, SEEK_SET);
   size_t readLength = fread(script, sizeof(char), length, f);
   assert(readLength == length);
-  // TODO: Error handling
+  // TODO: Error handling, ugh
   // if (feof(f)) printf("Error reading test.bin: unexpected end of file\n");
   // else if (ferror(f)) perror("Error reading test.bin");
   fclose(f);

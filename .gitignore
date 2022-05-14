@@ -2,6 +2,7 @@
 
 # Targets
 bin/peregrine
+bin/tests/
 
 # RenderDoc Capture Settings and Files
 cube.cap
@@ -50,3 +51,7 @@ cube.cap
 *.su
 *.idb
 *.pdb
+
+# Coverage files
+*.gcda
+*.gcno
