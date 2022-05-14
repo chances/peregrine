@@ -39,7 +39,10 @@ int main(int argc, char const *argv[]) {
   gpuInit(runtime, surface);
 
   scriptLoad(runtime, argv[1], "main");
-  WrenHandle* app = wrenGetClass(runtime->vm, "main", "App");
+  wrenEnsureSlots(runtime->vm, 1);
+  wrenGetVariable(runtime->vm, "main", "App", 0);
+  WrenHandle* appClass = wrenGetClass(runtime->vm, "main", "App");
+  WrenHandle* app = wrenGetSlotHandle(runtime->vm, 0);
   WrenHandle* app_tick = wrenMakeCallHandle(runtime->vm, "tick(_)");
 
   #pragma region Main Loop
