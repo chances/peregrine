@@ -7,10 +7,10 @@ endif
 
 .DEFAULT_GOAL := wren/lib/libwren.a
 
-wren/README.md:
+wren/projects/make/Makefile:
 	@echo "Downloading Wren…"
 	git clone -b $(VERSION) https://github.com/wren-lang/wren.git --depth 1
 
-wren/lib/libwren.a: wren/README.md
+wren/lib/libwren.a: wren/projects/make/Makefile
 	@echo "Building Wren…"
 	@make -C $(MAKE_DIR) wren
