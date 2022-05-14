@@ -1,5 +1,4 @@
-#ifndef PEREGRINE_RUNTIME_H
-#define PEREGRINE_RUNTIME_H
+#pragma once
 
 #include <wgpu.h>
 #include <wren.h>
@@ -12,5 +11,3 @@ struct Runtime {
   WGPUDevice device;
 };
 typedef struct Runtime Runtime;
-
-#endif // PEREGRINE_RUNTIME_H

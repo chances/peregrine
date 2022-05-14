@@ -1,5 +1,4 @@
-#ifndef PEREGRINE_PLATFORM_H
-#define PEREGRINE_PLATFORM_H
+#pragma once
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -10,5 +9,3 @@
 #include "platform/mac.h"
 #endif
 #endif
-
-#endif // PEREGRINE_PLATFORM_H

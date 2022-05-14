@@ -1,5 +1,4 @@
-#ifndef PEREGRINE_SCRIPT_H
-#define PEREGRINE_SCRIPT_H
+#pragma once
 
 #include <stdio.h>
 #include <wren.h>
@@ -90,5 +89,3 @@ inline WrenHandle* wrenGetClass(WrenVM* vm, const char* module, const char* clas
   wrenGetVariable(vm, module, class, 0);
   return wrenGetSlotHandle(vm, 0);
 }
-
-#endif // PEREGRINE_SCRIPT_H

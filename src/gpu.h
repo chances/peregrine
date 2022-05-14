@@ -1,5 +1,4 @@
-#ifndef PEREGRINE_GPU_H
-#define PEREGRINE_GPU_H
+#pragma once
 
 #include <assert.h>
 #include <wgpu.h>
@@ -79,5 +78,3 @@ void gpuInit(Runtime* runtime, WGPUSurface surface) {
   }, &peregrine_gpu_requestDeviceCallback, (void*) runtime);
 }
 #pragma endregion
-
-#endif // PEREGRINE_GPU_H
