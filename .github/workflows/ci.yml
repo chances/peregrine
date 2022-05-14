@@ -17,7 +17,7 @@ jobs:
         path: subprojects/glfw-3.3.6
         key: ${{ runner.os }}-glfw
     - name: configure
-      run: ./configure
+      run: make configure
     - name: make
       run: make
     - name: make check
